@@ -107,17 +107,6 @@
     <div class="flex items-center justify-center min-h-screen px-6 py-20 sm:py-32 lg:py-48">
         {{ $slot }}
     </div>
-    @session('success')
-      <div
-        x-data="{show: true}"
-        x-init="setTimeout(() => show = false, 3000)"
-        x-show="show"
-        x-transition.opacity.duration.1000ms
-        class="bg-gray-600 text-white px-4 py-3 absolute top-5 right-25 rounded-lg"
-      >
-        {{ $value }}
-      </div>
-    @endsession
     <footer class="border-t border-white/10">
       <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div class="flex justify-center gap-12 sm:gap-24 lg:gap-48">
@@ -175,7 +164,9 @@
           </div>
 
           <div class="mt-12 border-t border-white/10 pt-6">
-            <p class="text-center text-sm text-white">© 2026 Georgios Panagiotakopoulos. Built with Laravel & Tailwind CSS.</p>
+            <p class="text-center text-sm text-white">
+                © 2026 Georgios Panagiotakopoulos. Built with Laravel & Tailwind CSS.
+            </p>
           </div>
         </div>
       </div>

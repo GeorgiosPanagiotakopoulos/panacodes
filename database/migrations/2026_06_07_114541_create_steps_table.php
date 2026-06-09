@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Idea;
 
 return new class extends Migration
 {
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Idea::class)->constrained()->cascadeOnDelete();
             $table->string('description');
-            $table->boolean('completed')->default(false)   ;
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

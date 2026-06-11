@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Idea;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

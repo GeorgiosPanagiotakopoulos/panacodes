@@ -1,12 +1,12 @@
 <header class="absolute inset-x-0 top-0">
-<nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8">
-    <div class="flex lg:flex-1">
+<nav aria-label="Global" class="flex items-center justify-between p-6 md:px-8">
+    <div class="flex md:flex-1">
     <a href="/" class="-m-1.5 p-1.5">
         <span class="sr-only">Panacodes</span>
         <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="" class="h-8 w-auto" />
     </a>
     </div>
-    <div class="flex lg:hidden">
+    <div class="flex md:hidden">
     <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-200">
         <span class="sr-only">Open main menu</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
@@ -14,21 +14,21 @@
         </svg>
     </button>
     </div>
-    <div class="hidden lg:flex lg:gap-x-12">
+    <div class="hidden md:flex md:gap-x-12">
     <a href="/about" class="text-sm/6 font-semibold text-zinc-400 transition hover:text-white">About Me</a>
     <a href="/projects" class="text-sm/6 font-semibold text-zinc-400 transition hover:text-white">Projects</a>
     <a href="/contact" class="text-sm/6 font-semibold text-zinc-400 transition hover:text-white">Contact</a>
     </div>
 
     @guest
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-x-8">
+    <div class="hidden md:flex md:flex-1 md:justify-end gap-x-8">
         <a href="/login" class="text-sm/6 font-semibold text-zinc-400 transition hover:text-white">Log in</a>
         <a href="/register" class="text-sm/6 font-semibold text-zinc-400 transition hover:text-white">Register</a>
     </div>
     @endguest
 
     @auth
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-x-8">
+    <div class="hidden md:flex md:flex-1 md:justify-end gap-x-8">
         <form action="/logout" method="POST">
             @csrf
             <button type="submit" class="text-sm/6 font-semibold text-zinc-400 transition hover:text-white">
@@ -39,7 +39,7 @@
     @endauth
 </nav>
 <el-dialog>
-    <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
+    <dialog id="mobile-menu" class="backdrop:bg-transparent md:hidden">
     <div tabindex="0" class="fixed inset-0 focus:outline-none">
         <el-dialog-panel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10">
         <div class="flex items-center justify-between">

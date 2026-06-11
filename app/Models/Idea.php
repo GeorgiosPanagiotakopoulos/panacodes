@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Enums\IdeaStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
@@ -12,6 +15,15 @@ class Idea extends Model
 {
     /** @use HasFactory<\Database\Factories\IdeaFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'title',
+        'description',
+        'status',
+        'links',
+        'image_path',
+    ];
 
     protected $casts = [
         'links' => AsArrayObject::class,

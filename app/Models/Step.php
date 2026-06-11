@@ -4,11 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Idea;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Step extends Model
 {
     /** @use HasFactory<\Database\Factories\StepFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'description',
+        'completed',
+    ];
 
     protected $attributes = ['completed' => false];
 

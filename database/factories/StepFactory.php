@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Step;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Idea;
 
 /**
  * @extends Factory<Step>

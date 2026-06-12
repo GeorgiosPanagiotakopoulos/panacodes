@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class SessionController extends Controller
 {
@@ -26,9 +25,9 @@ class SessionController extends Controller
                 ->withInput();
         }
 
-         $request->session()->regenerate();
+        $request->session()->regenerate();
 
-         return redirect()->intended('/')->with('success', 'You are now logged in.');
+        return redirect()->intended('/')->with('success', 'You are now logged in.');
     }
 
     public function destroy(Request $request)

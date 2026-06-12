@@ -10,7 +10,7 @@
             </li>
 
             <li>
-                <a href="/about" class="text-zinc-400 transition hover:text-white">About me</a>
+                <a href="/about" class="text-zinc-400 transition hover:text-white">About Me</a>
             </li>
 
             <li>

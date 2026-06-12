@@ -10,8 +10,11 @@
             <x-form.field name="email" label="Email" type="email" />
             <x-form.field name="password" label="Password" type="password" />
 
-            <button type="submit" class="mt-10 block w-full rounded-md bg-indigo-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Log In</button>
-
+            <button type="submit" class="mt-10 w-full rounded-xl bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-zinc-200">Log In</button>
+            <p class="mt-5 text-sm/6 font-semibold text-zinc-400 transition ">
+                Not registered yet?
+                <a href="/register" class="hover:text-white">Sign up</a>
+            </p>
         </form>
     </div>
 

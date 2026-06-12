@@ -37,6 +37,29 @@
                 </div>
             </div>
 
+            <div class="mt-6">
+                <label class="flex gap-x-3 text-sm leading-6 text-zinc-300">
+                    <input
+                        type="checkbox"
+                        name="consent"
+                        value="1"
+                        required
+                        class="mt-1 h-4 w-4 rounded border-white/20 bg-white/5 text-white"
+                    >
+
+                    <span>
+                        I consent to the processing of my personal data for the purpose of responding to my inquiry and I have read the
+                        <a href="/privacy" target="_blank" class="font-semibold text-white underline hover:text-zinc-300">
+                            Privacy Policy
+                        </a>.
+                    </span>
+                </label>
+
+                @error('consent')
+                    <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
+
             <div class="mt-10">
             <button type="submit" class="w-full rounded-xl bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-zinc-200">Let's talk</button>
             </div>

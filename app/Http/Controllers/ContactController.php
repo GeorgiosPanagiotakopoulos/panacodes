@@ -15,6 +15,7 @@ class ContactController extends Controller
             'email' => ['required', 'email', 'max:255'],
             'phone_number' => ['nullable', 'string', 'max:30'],
             'message' => ['required', 'string', 'max:5000'],
+            'consent' => ['accepted'],
         ]);
 
         Mail::to(config('mail.contact_recipient'))->send(

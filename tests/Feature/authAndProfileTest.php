@@ -11,6 +11,16 @@ class AuthAndProfileTest extends TestCase
 {
     use RefreshDatabase;
 
+    private function validRegistrationData(array $overrides = []): array
+    {
+        return array_replace([
+            'name' => 'Georgios Panagiotakopoulos',
+            'email' => 'georgios@example.com',
+            'password' => 'password123',
+            'privacy_policy' => '1',
+        ], $overrides);
+    }
+
     public function test_guest_can_view_register_page(): void
     {
         $this->get(route('register'))
@@ -19,11 +29,7 @@ class AuthAndProfileTest extends TestCase
 
     public function test_user_can_register(): void
     {
-        $this->post('/register', [
-            'name' => 'Georgios Panagiotakopoulos',
-            'email' => 'georgios@example.com',
-            'password' => 'password123',
-        ])
+        $this->post('/register', $this->validRegistrationData())
             ->assertRedirect('/')
             ->assertSessionHas('success', 'Registration complete!');
 
@@ -35,13 +41,23 @@ class AuthAndProfileTest extends TestCase
         ]);
     }
 
+    public function test_register_requires_privacy_policy_acceptance(): void
+    {
+        $this->post('/register', $this->validRegistrationData([
+            'privacy_policy' => null,
+        ]))
+            ->assertSessionHasErrors('privacy_policy');
+
+        $this->assertGuest();
+    }
+
     public function test_register_requires_valid_data(): void
     {
-        $this->post('/register', [
+        $this->post('/register', $this->validRegistrationData([
             'name' => 'ab',
             'email' => 'not-an-email',
             'password' => 'short',
-        ])
+        ]))
             ->assertSessionHasErrors(['name', 'email', 'password']);
 
         $this->assertGuest();
@@ -53,11 +69,10 @@ class AuthAndProfileTest extends TestCase
             'email' => 'georgios@example.com',
         ]);
 
-        $this->post('/register', [
+        $this->post('/register', $this->validRegistrationData([
             'name' => 'Another User',
             'email' => 'georgios@example.com',
-            'password' => 'password123',
-        ])
+        ]))
             ->assertSessionHasErrors('email');
     }
 
@@ -170,7 +185,9 @@ class AuthAndProfileTest extends TestCase
             ])
             ->assertRedirect('/profile');
 
-        $this->assertTrue(Hash::check('new-password123', $user->fresh()->password));
+        $this->assertTrue(
+            Hash::check('new-password123', $user->fresh()->password)
+        );
     }
 
     public function test_profile_update_requires_valid_data(): void
@@ -185,7 +202,11 @@ class AuthAndProfileTest extends TestCase
                 'password' => 'short',
             ])
             ->assertRedirect('/profile')
-            ->assertSessionHasErrors(['name', 'email', 'password']);
+            ->assertSessionHasErrors([
+                'name',
+                'email',
+                'password',
+            ]);
     }
 
     public function test_profile_email_must_be_unique_except_for_current_user(): void

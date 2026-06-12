@@ -30,6 +30,9 @@ Route::get('/about', function () {
 Route::get('/projects', function () {
     return view('projects');
 });
+Route::get('/privacy', function () {
+    return view('privacy');
+});
 Route::get('/contact', function () {
     return view('contact');
 });

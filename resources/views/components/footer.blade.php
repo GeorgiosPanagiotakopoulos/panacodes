@@ -20,6 +20,10 @@
             <li>
                 <a href="/contact" class="text-zinc-400 transition hover:text-white">Contact</a>
             </li>
+
+            <li>
+                <a href="/privacy" class="text-zinc-400 transition hover:text-white">Privacy Policy</a>
+            </li>
             </ul>
         </div>
 

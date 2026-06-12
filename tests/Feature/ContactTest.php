@@ -15,6 +15,7 @@ class ContactTest extends TestCase
             'email' => 'john@example.com',
             'phone_number' => '+30 6900000000',
             'message' => 'Hello, I would like to contact you.',
+            'consent' => '1',
         ], $overrides);
     }
 
@@ -22,7 +23,8 @@ class ContactTest extends TestCase
     {
         $this->get('/contact')
             ->assertOk()
-            ->assertSeeText('Contact me');
+            ->assertSeeText('Contact me')
+            ->assertSeeText('Privacy Policy');
     }
 
     public function test_contact_form_sends_email_to_configured_recipient(): void
@@ -71,6 +73,20 @@ class ContactTest extends TestCase
             return $mail->hasTo('owner@example.com')
                 && $mail->data['phone_number'] === null;
         });
+    }
+
+    public function test_contact_consent_is_required(): void
+    {
+        Mail::fake();
+
+        $this->from('/contact')
+            ->post(route('contact.store'), $this->validContactData([
+                'consent' => null,
+            ]))
+            ->assertRedirect('/contact')
+            ->assertSessionHasErrors('consent');
+
+        Mail::assertNothingSent();
     }
 
     public function test_name_is_required(): void

@@ -6,6 +6,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\StepController;
 use App\Http\Controllers\IdeaImageController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,3 +38,5 @@ Route::patch('/ideas/{idea}', [IdeaController::class, 'update'])->name('idea.upd
 
 Route::patch('/steps/{step}', [StepController::class, 'update'])->name('step.update')->middleware('auth');
 Route::delete('/ideas/{idea}/image', [IdeaImageController::class, 'destroy'])->name('idea.image.destroy')->middleware('auth');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

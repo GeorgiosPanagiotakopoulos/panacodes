@@ -2,18 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\IdeaStatus;
+use Database\Factories\IdeaFactory;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Enums\IdeaStatus;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class Idea extends Model
 {
-    /** @use HasFactory<\Database\Factories\IdeaFactory> */
+    /** @use HasFactory<IdeaFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -34,7 +35,7 @@ class Idea extends Model
         'status' => IdeaStatus::PENDING->value,
     ];
 
-    public static function statusCounts (User $user): Collection
+    public static function statusCounts(User $user): Collection
     {
         $counts = $user->ideas()
             ->selectRaw('status, count(*) as count')
@@ -43,7 +44,7 @@ class Idea extends Model
 
         return collect(IdeaStatus::cases())
             ->mapWithKeys(fn ($status) => [
-                $status->value => $counts->get($status->value, 0) 
+                $status->value => $counts->get($status->value, 0),
             ])
             ->put('all', Auth::user()->ideas()->count());
     }
@@ -57,5 +58,4 @@ class Idea extends Model
     {
         return $this->hasMany(Step::class);
     }
-
 }

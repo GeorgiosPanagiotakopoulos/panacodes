@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Idea;
-use App\Http\Requests\IdeaRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Enums\IdeaStatus;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\IdeaRequest;
+use App\Models\Idea;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,15 +22,15 @@ class IdeaController extends Controller
         $ideas = $user
             ->ideas()
             ->when(
-                in_array($request->status, IdeaStatus::values()), 
+                in_array($request->status, IdeaStatus::values()),
                 fn ($query) => $query->where('status', $request->status)
             )
             ->latest()
             ->get();
 
-        return view('ideas.ideas',[
+        return view('ideas.ideas', [
             'ideas' => $ideas,
-            'statusCounts' => Idea::statusCounts(Auth::user()), 
+            'statusCounts' => Idea::statusCounts(Auth::user()),
         ]);
     }
 
@@ -82,10 +81,11 @@ class IdeaController extends Controller
     {
         Gate::authorize('workWith', $idea);
 
-        return view('ideas.show',[
+        return view('ideas.show', [
             'idea' => $idea,
         ]);
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -137,7 +137,7 @@ class IdeaController extends Controller
     public function destroy(Idea $idea)
     {
         Gate::authorize('workWith', $idea);
-        
+
         $idea->delete();
 
         return to_route('ideas.index');

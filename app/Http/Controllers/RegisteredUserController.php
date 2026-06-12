@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class RegisteredUserController extends Controller
 {
@@ -13,7 +13,7 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -25,7 +25,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
         ]);
 
         Auth::login($user);

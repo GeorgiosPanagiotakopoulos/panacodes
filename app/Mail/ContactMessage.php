@@ -8,9 +8,7 @@ use Illuminate\Mail\Mailables\Envelope;
 
 class ContactMessage extends Mailable
 {
-    public function __construct(public array $data)
-    {
-    }
+    public function __construct(public array $data) {}
 
     public function envelope(): Envelope
     {
